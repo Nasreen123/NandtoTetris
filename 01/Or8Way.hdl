@@ -1,0 +1,59 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Or8Way.hdl
+
+/**
+ * 8-way Or: 
+ * out = (in[0] or in[1] or ... or in[7])
+ */
+
+CHIP Or8Way {
+    IN in[8];
+    OUT out;
+
+    PARTS:
+    // Put your code here:
+    // could also do a wave of ors - each or is three nands
+
+    // not all inputs:
+    Nand(a=in[0], b=in[0], out=not0);
+    Nand(a=in[1], b=in[1], out=not1);
+    Nand(a=in[2], b=in[2], out=not2);
+    Nand(a=in[3], b=in[3], out=not3);
+    Nand(a=in[4], b=in[4], out=not4);
+    Nand(a=in[5], b=in[5], out=not5);
+    Nand(a=in[6], b=in[6], out=not6);
+    Nand(a=in[7], b=in[7], out=not7);
+
+    // nand each pair
+    Nand(a=not0, b=not1, out=nand0.0);
+    Nand(a=not2, b=not3, out=nand0.1);
+    Nand(a=not4, b=not5, out=nand0.2);
+    Nand(a=not6, b=not7, out=nand0.3);
+
+    //not each pair
+    Nand(a=nand0.0, b=nand0.0, out=notnand0.0);
+    Nand(a=nand0.1, b=nand0.1, out=notnand0.1);
+    Nand(a=nand0.2, b=nand0.2, out=notnand0.2);
+    Nand(a=nand0.3, b=nand0.3, out=notnand0.3);
+
+    // nand each pair of those
+    Nand(a=notnand0.0, b=notnand0.1, out=nand1.0);
+    Nand(a=notnand0.2, b=notnand0.3, out=nand1.1);
+
+    // not them
+    Nand(a=nand1.0, b=nand1.0, out=notnand1.0);
+    Nand(a=nand1.1, b=nand1.1, out=notnand1.1);
+
+    // nand them
+    Nand(a=notnand1.0, b=notnand1.1, out=out);
+
+}
+
+
+
+
+
+
+
