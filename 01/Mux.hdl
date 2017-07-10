@@ -16,8 +16,8 @@ CHIP Mux {
     PARTS:
     // Put your code here:
     Nand(a=sel, b=sel, out=nsel); // not sel
-    Nand(a=a, b=nsel, out=c1); // Nand a sel
-    Nand(a=b, b=sel, out=c2); // Nand b notsel
+    Nand(a=a, b=nsel, out=c1); // Nand a not sel
+    Nand(a=b, b=sel, out=c2); // Nand b sel
     Nand(a=c1, b=c2, out=out);
 
 }
